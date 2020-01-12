@@ -1,8 +1,8 @@
-# Serverless Telegram Bot
+# Serverless Telegram Bot to work with WooCommerce shops
 
-Create serverless Telegram Bot with DB to keep track of users using Netlify Functions and FaunaDB
+Create serverless Telegram Bot with DB to keep track of events in your WooCommerce store using Netlify Functions and FaunaDB
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/jokarz/netlify-fauna-telegram-bot)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/SimonMayerhofer/telegram-woobot)
 
 # Getting Started
 
