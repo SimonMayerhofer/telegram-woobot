@@ -28,7 +28,7 @@ async function getUserCount() {
 	});
 }
 
-exports.newUser = async id => {
+exports.newUser = async user => {
 	const userCount = await getUserCount();
 
 	return new Promise((res, rej) => {
@@ -36,13 +36,15 @@ exports.newUser = async id => {
 			.query(
 				q.Create(q.Collection('user'), {
 					data: {
-						userId: id,
+						userId: user.id,
+						firstName: user.firstName,
+						lastName: user.lastName,
 						role: userCount === 0 ? 'admin' : '',
+						username: user.username,
 					},
 				}),
 			)
-			.then(ret => {
-				console.log(ret);
+			.then(() => {
 				res(userCount === 0 ? 'first user added' : 'user added');
 			})
 			.catch(err => {

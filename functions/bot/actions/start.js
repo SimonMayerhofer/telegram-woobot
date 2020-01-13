@@ -2,14 +2,15 @@ const { newUser } = require('../components/fauna');
 const { getUser } = require('../components/helper');
 
 module.exports = async ctx => {
-	const { id, isBot, name } = getUser(ctx.from);
+	const user = getUser(ctx.from);
+	const { isBot, firstName: name } = getUser(ctx.from);
 
 	if (isBot) {
 		return ctx.reply(`Sorry I only interact with humans!`);
 	}
 
 	try {
-		const response = await newUser(id);
+		const response = await newUser(user);
 
 		if (response === 'first user added') {
 			return ctx.reply(`Hi ${name}! As the first user, you are the admin now.`);
