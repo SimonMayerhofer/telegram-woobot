@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 /* eslint import/no-dynamic-require:0 */
 /* eslint global-require:0 */
 /* eslint-disable-next-line func-names */

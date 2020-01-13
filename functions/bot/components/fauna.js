@@ -1,6 +1,11 @@
 const faunadb = require('faunadb');
 
-const client = new faunadb.Client({ secret: process.env.FAUNA_SECRET_KEY });
+const client = new faunadb.Client({
+	secret:
+		process.env.NODE_ENV !== 'production'
+			? process.env.FAUNA_SECRET_KEY_DEV
+			: process.env.FAUNA_SECRET_KEY,
+});
 const q = faunadb.query;
 
 exports.newUser = id => {

@@ -6,7 +6,7 @@ Create serverless Telegram Bot with DB to keep track of events in your WooCommer
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/SimonMayerhofer/telegram-woobot)
 
-# Getting Started
+## Getting Started
 
 * Getting Telegram Bot token and FaunaDB key
 * Deploy to Netlify
@@ -33,7 +33,34 @@ Afterwhich, YOU ARE DONE!🎉🎉
 
 Try typing ```/start``` to your bot and watch as the user ID of the Telegram user is stored inside your FaunaDB
 
-# Extending Telegram Bot Functionality
+## Extending Telegram Bot Functionality
 
 This bot uses telegraf.js for its Telegram Bot functionality. Head to its [website](https://telegraf.js.org/#/) to find out how to extend the functionality of the bot you have created :)
 
+## Local Development
+
+To locally test and develop the bot follow these steps:
+
+1. Create a new Telegram Bot and a new FaunaDB database for testing.
+2. Create `.env` file and enter your bot token + secret key:
+   ```
+   TELEGRAM_BOT_TOKEN_DEV=your_dev_bot_token
+   FAUNA_SECRET_KEY_DEV=your_dev_secret_key
+   ```
+3. Setup Netlify CLI for Netlify Dev server ([more info](https://github.com/netlify/cli/blob/master/docs/netlify-dev.md))
+   ```bash
+   # Install the Netlify CLI
+   npm install netlify-cli -g
+   # Login to Netlify
+   netlify login
+   # Link to site on Netlify
+   netlify link
+   ```
+4. Start Netlify Dev server
+   ```
+   netlify dev --live
+   ```
+5. Run dev script. This script updates your bot webhook to your local Netlify Dev server.
+   ```
+   npm run dev
+   ```
