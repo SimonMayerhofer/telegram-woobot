@@ -72,7 +72,7 @@ async function optionExists(key) {
 }
 
 exports.setOption = async (key, value) => {
-	console.log(`Set option "${key}".`);
+	console.log(`\nSet option "${key}".`);
 	const exists = await optionExists(key);
 
 	if (exists) {
@@ -126,7 +126,7 @@ exports.setOption = async (key, value) => {
 };
 
 exports.getOption = async (key, defaultValue) => {
-	console.log(`Get option by key: "${key}"`);
+	console.log(`\nGet option by key: "${key}"`);
 
 	return new Promise((res, rej) => {
 		client
