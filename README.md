@@ -33,6 +33,11 @@ Afterwhich, YOU ARE DONE!🎉🎉
 
 Try typing ```/start``` to your bot and watch as the user ID of the Telegram user is stored inside your FaunaDB
 
+## Available bot commands
+
+* `/start` : Add own user to the database. If first user, role is set to administrator.
+* `/chatId` : Print chat ID of current chat.
+
 ## Extending Telegram Bot Functionality
 
 This bot uses telegraf.js for its Telegram Bot functionality. Head to its [website](https://telegraf.js.org/#/) to find out how to extend the functionality of the bot you have created :)
