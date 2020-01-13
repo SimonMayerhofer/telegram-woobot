@@ -1,0 +1,19 @@
+{
+	"env": {
+		"node": true
+	},
+	"extends": ["airbnb-base", "prettier"],
+	"plugins": ["import", "prettier"],
+	"rules": {
+		"no-console": 1,
+		"no-unused-vars": 1,
+		"prettier/prettier": 2,
+		"no-prototype-builtins": 0
+	},
+	"parserOptions": {
+		"ecmaVersion": 10,
+		"sourceType": "module",
+		"allowImportExportEverywhere": false,
+		"codeFrame": false
+	}
+}
