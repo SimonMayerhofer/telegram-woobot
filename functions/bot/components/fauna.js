@@ -7,10 +7,12 @@ exports.newUser = id => {
 	return new Promise((res, rej) => {
 		client
 			.query(q.Create(q.Collection('user'), { data: { userId: id } }))
-			.then(() => {
+			.then(ret => {
+				console.log(ret);
 				res(true);
 			})
 			.catch(err => {
+				console.log(err);
 				rej(err);
 			});
 	});
