@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
+		"build": "npm run test",
 		"dev": "grunt",
 		"test": "grunt lint"
 	},
