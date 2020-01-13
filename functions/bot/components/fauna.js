@@ -14,7 +14,7 @@ async function getUserCount() {
 			.query(
 				q.Count(
 					q.Map(
-						q.Paginate(q.Match(q.Index('all_user'))),
+						q.Paginate(q.Match(q.Index('all_users'))),
 						q.Lambda('X', q.Get(q.Var('X'))),
 					),
 				),
@@ -34,7 +34,7 @@ exports.newUser = async user => {
 	return new Promise((res, rej) => {
 		client
 			.query(
-				q.Create(q.Collection('user'), {
+				q.Create(q.Collection('users'), {
 					data: {
 						userId: user.id,
 						firstName: user.firstName,
