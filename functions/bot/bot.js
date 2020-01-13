@@ -16,3 +16,7 @@ exports.handler = async event => {
 	await bot.handleUpdate(JSON.parse(event.body));
 	return { statusCode: 200, body: '' };
 };
+
+bot.command('chatId', async ctx => {
+	return ctx.reply(`The chat ID for this chat is: ${ctx.chat.id}`);
+});

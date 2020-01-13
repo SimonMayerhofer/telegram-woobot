@@ -9,15 +9,20 @@ module.exports = async ctx => {
 	}
 
 	try {
-		const isNewUser = await newUser(id);
-		if (isNewUser === true) {
-			return ctx.reply(`Added ${name} to db!`);
+		const response = await newUser(id);
+
+		if (response === 'first user added') {
+			return ctx.reply(`Hi ${name}! As the first user, you are the admin now.`);
 		}
-		if (isNewUser instanceof Error) {
-			return ctx.reply(isNewUser.message);
+		if (response === 'user added') {
+			return ctx.reply(`Hi ${name}!`);
 		}
-		return ctx.reply(`Unknown error. Please try again.`);
+		return ctx.reply(`Unknown error: `);
 	} catch (e) {
-		return ctx.reply(`Error occured`);
+		// User already in the database.
+		if (e.message === 'instance not unique') {
+			return ctx.reply(`Hi ${name}!`);
+		}
+		return ctx.reply(`Error occured: ${e.message}`);
 	}
 };
