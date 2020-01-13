@@ -1,5 +1,5 @@
 {
-  "name": "toto",
+  "name": "telegram-woobot",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -9,10 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "faunadb": "^2.10.0",
-    "telegraf": "^3.34.1"
+    "faunadb": "2.10.2",
+    "telegraf": "3.35.0"
   },
   "devDependencies": {
-    "netlify-lambda": "^1.6.3"
+    "netlify-lambda": "1.6.3"
   }
 }
