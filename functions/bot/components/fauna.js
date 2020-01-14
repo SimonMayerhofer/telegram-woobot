@@ -53,6 +53,27 @@ exports.newUser = async user => {
 	});
 };
 
+exports.isUserAdmin = async id => {
+	console.log(`* Check if user "${id}" is admin.`);
+
+	return new Promise((res, rej) => {
+		client
+			.query(
+				q.Map(
+					q.Paginate(q.Match(q.Index('users_search_by_id'), id)),
+					q.Lambda('X', q.Get(q.Var('X'))),
+				),
+			)
+			.then(ret => {
+				if (ret.data.length !== 0) {
+					console.log(`* User ${id} found.`);
+					res(ret.data[0].data.role === 'admin');
+				}
+				rej(new Error('user not found'));
+			});
+	});
+};
+
 async function optionExists(key) {
 	console.log(`* Check if option "${key}" exists.`);
 
