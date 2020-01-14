@@ -161,10 +161,10 @@ exports.getOption = async (key, defaultValue) => {
 				if (ret.data.length === 0) {
 					console.log(`* No option found. Return default value.`);
 					res(defaultValue);
+				} else {
+					console.log(`* Option found.`);
+					res(ret.data[0].data.value);
 				}
-
-				console.log(`* Option found.`);
-				res(ret.data[0].data.value);
 			});
 	});
 };
