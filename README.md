@@ -15,7 +15,7 @@ Create serverless Telegram Bot with DB to keep track of events in your WooCommer
 ## Getting Telegram Bot token and FaunaDB key
 On Telegram, create a new Telegram bot by talking to [@botfather](https://telegram.me/botfather) and thereafter getting the token for the Telegram Bot.
 
-On FaunaDb site, create a collection with the name ```user``` (optionally, generate an index for the collection and specifying the term for the **userId** to be unique). Head to the security section and generate a FaunaDB key for the collection.
+On the FaunaDB website, create a database and head to the security section to generate a FaunaDB key for the database.
 
 ## Deploy to Netlify
 
