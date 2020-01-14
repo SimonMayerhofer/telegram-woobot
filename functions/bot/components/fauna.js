@@ -36,7 +36,7 @@ exports.newUser = async user => {
 			.query(
 				q.Create(q.Collection('users'), {
 					data: {
-						userId: user.id,
+						id: user.id,
 						firstName: user.firstName,
 						lastName: user.lastName,
 						role: userCount === 0 ? 'admin' : '',
