@@ -62,23 +62,17 @@ class Collection {
 		});
 	}
 
-	async createAllIndex() {
-		console.log(`* create index ${this.getAllIndexName()}`);
+	async createIndex(paramObj) {
+		console.log(`* create index ${paramObj.name}`);
 
 		const { client, q } = this;
 
 		return new Promise((res, rej) => {
 			client
-				.query(
-					q.CreateIndex({
-						name: `${this.getAllIndexName()}`,
-						source: q.Collection(this.getName()),
-						serialized: true,
-					}),
-				)
-				.then(() => {
+				.query(q.CreateIndex(paramObj))
+				.then(ret => {
 					console.log('* successfully created');
-					res();
+					res(ret);
 				})
 				.catch(err => {
 					rej(err);
@@ -86,8 +80,8 @@ class Collection {
 		});
 	}
 
-	async allIndexExists() {
-		console.log(`* check if index ${this.getAllIndexName()} exists.`);
+	async indexExists(name) {
+		console.log(`* check if index ${name} exists.`);
 
 		const { client, q } = this;
 
@@ -97,12 +91,12 @@ class Collection {
 				.then(ret => {
 					let exists = false;
 					ret.data.forEach(index => {
-						if (index.id === `${this.getAllIndexName()}`) {
+						if (index.id === name) {
 							exists = true;
 						}
 					});
 					console.log(
-						`* index ${exists ? 'already exists' : 'does not exist'}.`,
+						`* ${name} ${exists ? 'already exists' : 'does not exist'}.`,
 					);
 					res(exists);
 				})
@@ -121,9 +115,13 @@ class Collection {
 			await this.createCollection();
 		}
 
-		const allIndexExists = await this.allIndexExists();
+		const allIndexExists = await this.indexExists(this.getAllIndexName());
 		if (!allIndexExists) {
-			await this.createAllIndex();
+			await this.createIndex({
+				name: `${this.getAllIndexName()}`,
+				source: this.q.Collection(this.getName()),
+				serialized: true,
+			});
 		}
 	}
 }
