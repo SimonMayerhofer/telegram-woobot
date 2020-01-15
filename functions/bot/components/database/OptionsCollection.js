@@ -29,6 +29,104 @@ class OptionsCollection extends Collection {
 			});
 		}
 	}
+
+	async getOption(key, defaultValue) {
+		const { client, q } = this;
+		console.log(`\nGet option by key: "${key}"`);
+
+		return new Promise((res, rej) => {
+			client
+				.query(
+					q.Map(
+						q.Paginate(q.Match(q.Index(this.getSearchByKeyIndexName()), key)),
+						q.Lambda('X', q.Get(q.Var('X'))),
+					),
+				)
+				.then(ret => {
+					if (ret.data.length === 0) {
+						console.log(`* No option found. Return default value.`);
+						res(defaultValue);
+					} else {
+						console.log(`* Option found.`);
+						res(ret.data[0].data.value);
+					}
+				});
+		});
+	}
+
+	async optionExists(key) {
+		const { client, q } = this;
+		console.log(`* Check if option "${key}" exists.`);
+
+		return new Promise((res, rej) => {
+			client
+				.query(
+					q.Map(
+						q.Paginate(q.Match(q.Index(this.getSearchByKeyIndexName()), key)),
+						q.Lambda('X', q.Get(q.Var('X'))),
+					),
+				)
+				.then(ret => {
+					console.log(`* Option ${ret.data.length === 0 ? 'not ' : ''}found.`);
+					res(ret.data.length !== 0);
+				});
+		});
+	}
+
+	async setOption(key, value) {
+		console.log(`\nSet option "${key}".`);
+		const { client, q } = this;
+		const exists = await this.optionExists(key);
+
+		if (exists) {
+			console.log('* key exists. update key.');
+			return new Promise((res, rej) => {
+				client
+					.query(
+						q.Update(
+							q.Select(
+								'ref',
+								q.Get(q.Match(q.Index(this.getSearchByKeyIndexName()), key)),
+							),
+							{
+								data: {
+									key,
+									value,
+								},
+							},
+						),
+					)
+					.then(ret => {
+						console.log('* key updated.');
+						res(ret);
+					})
+					.catch(err => {
+						console.log('* update failed.');
+						rej(err);
+					});
+			});
+		}
+
+		return new Promise((res, rej) => {
+			client
+				.query(
+					q.Create(q.Collection(this.getName()), {
+						data: {
+							key,
+							value,
+						},
+					}),
+				)
+				.then(ret => {
+					console.log('* new key set.');
+					res(ret);
+				})
+				.catch(err => {
+					console.log('* new key set failed.');
+					rej(err);
+				});
+		});
+	}
 }
 
 exports.OptionsCollection = OptionsCollection;

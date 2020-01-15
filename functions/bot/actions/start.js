@@ -1,4 +1,4 @@
-const { newUser } = require('../components/fauna');
+const { Database } = require('../components/database/Database');
 const { getUser } = require('../components/helper');
 
 module.exports = async ctx => {
@@ -10,7 +10,8 @@ module.exports = async ctx => {
 	}
 
 	try {
-		const response = await newUser(user);
+		const db = new Database();
+		const response = await db.addUser(user);
 
 		if (response === 'first user added') {
 			return ctx.reply(`Hi ${name}! As the first user, you are the admin now.`);

@@ -11,16 +11,42 @@ class Database {
 					: process.env.FAUNA_SECRET_KEY,
 		});
 		this.query = faunadb.query;
+		this.users = new UsersCollection(this.client, this.query);
+		this.options = new OptionsCollection(this.client, this.query);
 	}
 
 	async setup() {
 		console.log('Start database setup.');
+		await this.users.setup();
+		await this.options.setup();
+	}
 
-		const users = new UsersCollection(this.client, this.query);
-		await users.setup();
+	/* Users */
 
-		const options = new OptionsCollection(this.client, this.query);
-		await options.setup();
+	async addUser(user) {
+		return this.users.addUser(user);
+	}
+
+	async getUserCount() {
+		return this.users.getUserCount();
+	}
+
+	async isUserAdmin(id) {
+		return this.users.isUserAdmin(id);
+	}
+
+	/* Options */
+
+	async getOption(key) {
+		return this.options.getOption(key);
+	}
+
+	async optionExists(key) {
+		return this.options.optionsExists(key);
+	}
+
+	async setOption(key, value) {
+		return this.options.setOption(key, value);
 	}
 }
 

@@ -1,10 +1,11 @@
-const { getOption, setOption, isUserAdmin } = require('../components/fauna');
+const { Database } = require('../components/database/Database');
 
 module.exports = async ctx => {
-	const isAdmin = await isUserAdmin(ctx.from.id);
+	const db = new Database();
+	const isAdmin = await db.isUserAdmin(ctx.from.id);
 
 	if (isAdmin) {
-		const notificationChats = await getOption('notificationChats', []);
+		const notificationChats = await db.getOption('notificationChats', []);
 		const newNotifyChats = [];
 
 		// check if chat already in notifications list.
@@ -14,7 +15,7 @@ module.exports = async ctx => {
 			}
 		});
 
-		await setOption('notificationChats', newNotifyChats);
+		await db.setOption('notificationChats', newNotifyChats);
 		return ctx.reply(`Notifications disabled`);
 	}
 
