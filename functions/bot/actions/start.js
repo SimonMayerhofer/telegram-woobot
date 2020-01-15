@@ -1,7 +1,7 @@
-const { Database } = require('../components/database/Database');
 const { getUser } = require('../components/helper');
 
 module.exports = async ctx => {
+	const { db } = ctx;
 	const user = getUser(ctx.from);
 	const { isBot, firstName: name } = getUser(ctx.from);
 
@@ -10,7 +10,6 @@ module.exports = async ctx => {
 	}
 
 	try {
-		const db = new Database();
 		const response = await db.addUser(user);
 
 		if (response === 'first user added') {

@@ -5,12 +5,7 @@ const startAction = require('./actions/start');
 const enableNotificationsAction = require('./actions/enableNotifications');
 const disableNotificationsAction = require('./actions/disableNotifications');
 
-let db = null;
-
-(async () => {
-	console.log(`Database Version: ${Database.VERSION}`);
-	db = new Database();
-})();
+console.log(`Database Version: ${Database.VERSION}`);
 
 const bot = new Telegraf(
 	process.env.NODE_ENV !== 'production'
@@ -18,8 +13,10 @@ const bot = new Telegraf(
 		: process.env.TELEGRAM_BOT_TOKEN,
 );
 
+bot.context.db = new Database();
+
 bot.start(async ctx => {
-	await db.setup();
+	await ctx.db.setup();
 	return startAction(ctx);
 });
 

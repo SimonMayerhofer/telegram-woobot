@@ -1,7 +1,5 @@
-const { Database } = require('../components/database/Database');
-
 module.exports = async ctx => {
-	const db = new Database();
+	const { db } = ctx;
 	const isAdmin = await db.isUserAdmin(ctx.from.id);
 
 	if (isAdmin) {
