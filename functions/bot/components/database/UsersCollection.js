@@ -31,6 +31,7 @@ class UsersCollection extends Collection {
 	}
 
 	async addUser(user) {
+		console.log(`Add user ${user.id}`);
 		const { client, q } = this;
 		const userCount = await this.getUserCount();
 
@@ -57,6 +58,7 @@ class UsersCollection extends Collection {
 	}
 
 	async getUserCount() {
+		console.log(`Get user count`);
 		const { client, q } = this;
 		return new Promise((res, rej) => {
 			client
@@ -78,8 +80,8 @@ class UsersCollection extends Collection {
 	}
 
 	async isUserAdmin(id) {
+		console.log(`Check if user "${id}" is admin.`);
 		const { client, q } = this;
-		console.log(`* Check if user "${id}" is admin.`);
 
 		return new Promise((res, rej) => {
 			client

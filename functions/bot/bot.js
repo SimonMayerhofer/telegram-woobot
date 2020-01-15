@@ -10,7 +10,6 @@ let db = null;
 (async () => {
 	console.log(`Database Version: ${Database.VERSION}`);
 	db = new Database();
-	await db.setup();
 })();
 
 const bot = new Telegraf(
@@ -19,7 +18,8 @@ const bot = new Telegraf(
 		: process.env.TELEGRAM_BOT_TOKEN,
 );
 
-bot.start(ctx => {
+bot.start(async ctx => {
+	await db.setup();
 	return startAction(ctx);
 });
 

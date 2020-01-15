@@ -31,8 +31,8 @@ class OptionsCollection extends Collection {
 	}
 
 	async getOption(key, defaultValue) {
+		console.log(`Get option by key: "${key}"`);
 		const { client, q } = this;
-		console.log(`\nGet option by key: "${key}"`);
 
 		return new Promise((res, rej) => {
 			client
@@ -55,8 +55,8 @@ class OptionsCollection extends Collection {
 	}
 
 	async optionExists(key) {
+		console.log(`Check if option "${key}" exists.`);
 		const { client, q } = this;
-		console.log(`* Check if option "${key}" exists.`);
 
 		return new Promise((res, rej) => {
 			client
@@ -74,7 +74,7 @@ class OptionsCollection extends Collection {
 	}
 
 	async setOption(key, value) {
-		console.log(`\nSet option "${key}".`);
+		console.log(`Set option "${key}".`);
 		const { client, q } = this;
 		const exists = await this.optionExists(key);
 
