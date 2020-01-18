@@ -37,8 +37,8 @@ class Database {
 
 	/* Options */
 
-	async getOption(key) {
-		return this.options.getOption(key);
+	async getOption(key, defaultValue) {
+		return this.options.getOption(key, defaultValue);
 	}
 
 	async optionExists(key) {
