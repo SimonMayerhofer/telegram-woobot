@@ -20,9 +20,11 @@ const disableNotificationsAction = require('./actions/disableNotifications');
 console.log(`Database Version: ${Database.VERSION}`);
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
+const db = new Database();
+const wc = new WCHelper(bot, db);
 
-bot.context.db = new Database();
-bot.context.wc = new WCHelper();
+bot.context.db = db;
+bot.context.wc = wc;
 
 bot.start(async ctx => {
 	await ctx.db.setup();
@@ -30,10 +32,31 @@ bot.start(async ctx => {
 });
 
 exports.handler = async event => {
-	// webhook test call is not JSON, would throw an error.
-	if (!event.body.startsWith('webhook_id')) {
-		await bot.handleUpdate(JSON.parse(event.body));
+	// WooCommerce webhook
+	if ('x-wc-webhook-topic' in event.headers) {
+		console.log(`${event.headers['x-wc-webhook-topic']} received`);
+		switch (event.headers['x-wc-webhook-topic']) {
+			case 'order.created':
+				await wc.handleOrderCreated(JSON.parse(event.body));
+				break;
+			default:
+				console.log(
+					`Webhook ${event.headers['x-wc-webhook-topic']} handler not defined.`,
+				);
+				break;
+		}
+
+		return { statusCode: 200, body: '' };
 	}
+
+	// WooCommerce webhook test call on creation.
+	if (event.body.startsWith('webhook_id')) {
+		return { statusCode: 200, body: 'Webhook successfully set.' };
+	}
+
+	// handle telegram updates.
+	await bot.handleUpdate(JSON.parse(event.body));
+
 	return { statusCode: 200, body: '' };
 };
 

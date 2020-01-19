@@ -9,3 +9,7 @@ exports.getUser = info => {
 
 	return { id, isBot, firstName, lastName, username };
 };
+
+exports.formatCurrency = (number, currencySymbol) => {
+	return `${parseFloat(number).toFixed(2)}${currencySymbol}`;
+};
