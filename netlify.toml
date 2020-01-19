@@ -7,6 +7,9 @@
 [template.environment]
   FAUNA_SECRET_KEY = "FaunaDB secret key here"
   TELEGRAM_BOT_TOKEN = "Telegram bot token here"
+  WC_CONSUMER_KEY = "WooCommerce consumer key here"
+  WC_CONSUMER_SECRET = "WooCommerce consumer secret here"
+  WC_SITE_URL = "WooCommerce site URL here"
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"

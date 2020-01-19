@@ -12,16 +12,24 @@ Create serverless Telegram Bot with DB to keep track of events in your WooCommer
 * Deploy to Netlify
 * Hooking up the Bot
 
-## Getting Telegram Bot token and FaunaDB key
+## Getting Telegram Bot token, FaunaDB key & WooCommerce REST API Keys
 On Telegram, create a new Telegram bot by talking to [@botfather](https://telegram.me/botfather) and thereafter getting the token for the Telegram Bot.
 
 On the FaunaDB website, create a database and head to the security section to generate a FaunaDB key for the database.
+
+In your store create a new REST API Key in the WC settings and copy the consumer key + consumer secret.
 
 ## Deploy to Netlify
 
 Deploy to Netlify either by linking to this repository manually or by clicking the Deploy to netlify.
 
-Thereafter, fill in the environment variables ```TELEGRAM_BOT_TOKEN```, ```FAUNA_SECRET_KEY``` with the token and the secret key obtained respectively
+Thereafter, fill in the environment variables
+
+* `TELEGRAM_BOT_TOKEN`
+* `FAUNA_SECRET_KEY`
+* `WC_CONSUMER_KEY`
+* `WC_CONSUMER_SECRET`
+* `WC_SITE_URL`
 
 ## Hooking up the Bot
 
@@ -31,12 +39,14 @@ https://api.telegram.org/bot{your_bot_token}/setWebhook?url={url_of_the_Netlify_
 ```
 Afterwhich, YOU ARE DONE!🎉🎉
 
-Try typing ```/start``` to your bot and watch as the user ID of the Telegram user is stored inside your FaunaDB
+Try typing ```/start``` to your bot and see if it works. If everything worked, it'll greet you and tell you that you as the first user are the administrator.
 
 ## Available bot commands
 
 * `/start` : Add own user to the database. If first user, role is set to administrator.
 * `/chatId` : Print chat ID of current chat.
+* `/enableNotifications` : Enable WooCommerce notification (e.g. new orders) for current chat.
+* `/disableNotifications` : Disable WooCommerce notification for current chat.
 
 ## Extending Telegram Bot Functionality
 
@@ -51,6 +61,9 @@ To locally test and develop the bot follow these steps:
    ```
    TELEGRAM_BOT_TOKEN_DEV=your_dev_bot_token
    FAUNA_SECRET_KEY_DEV=your_dev_secret_key
+   WC_CONSUMER_KEY_DEV=your_dev_consumer_key
+   WC_CONSUMER_SECRET_DEV=your_dev_consumer_secret
+   WC_SITE_URL_DEV=https://www.example.com
    ```
 3. Setup Netlify CLI for Netlify Dev server ([more info](https://github.com/netlify/cli/blob/master/docs/netlify-dev.md))
    ```bash
@@ -69,3 +82,7 @@ To locally test and develop the bot follow these steps:
    ```
    npm run dev
    ```
+
+## Troubleshooting
+
+* "*unable to verify the first certificate*": If you get this message during local development because you're working with a local web-server add `NODE_TLS_REJECT_UNAUTHORIZED=0` to your `.env` file. **Important:** only do this with local web-servers while developing. If you get this message for your production server you have a problem with your SSL certificate. [More Informations](https://stackoverflow.com/q/31673587/2180161).

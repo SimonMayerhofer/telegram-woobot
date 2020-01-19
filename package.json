@@ -3,14 +3,16 @@
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
-		"build": "npm run test",
-		"dev": "grunt && grunt shell:updateBotWebhook && grunt watch",
+		"build": "npm run test && npm run updateWebhooks",
+		"updateWebhooks": "grunt shell:updateWebhooks",
+		"dev": "grunt && npm run updateWebhooks && grunt watch",
 		"test": "grunt lint"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"@woocommerce/woocommerce-rest-api": "1.0.1",
 		"dotenv": "8.2.0",
 		"faunadb": "2.10.2",
 		"telegraf": "3.35.0"

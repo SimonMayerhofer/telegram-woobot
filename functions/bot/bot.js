@@ -1,6 +1,7 @@
 require('dotenv').config();
 const Telegraf = require('telegraf');
 const { Database } = require('./components/database/Database');
+const { WCHelper } = require('./components/WCHelper');
 const startAction = require('./actions/start');
 const enableNotificationsAction = require('./actions/enableNotifications');
 const disableNotificationsAction = require('./actions/disableNotifications');
@@ -14,6 +15,7 @@ const bot = new Telegraf(
 );
 
 bot.context.db = new Database();
+bot.context.wc = new WCHelper();
 
 bot.start(async ctx => {
 	await ctx.db.setup();
@@ -21,7 +23,10 @@ bot.start(async ctx => {
 });
 
 exports.handler = async event => {
-	await bot.handleUpdate(JSON.parse(event.body));
+	// webhook test call is not JSON, would throw an error.
+	if (!event.body.startsWith('webhook_id')) {
+		await bot.handleUpdate(JSON.parse(event.body));
+	}
 	return { statusCode: 200, body: '' };
 };
 
