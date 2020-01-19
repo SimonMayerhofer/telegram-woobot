@@ -45,6 +45,16 @@ Afterwhich, YOU ARE DONE!🎉🎉
 
 Try typing ```/start``` to your bot and see if it works. If everything worked, it'll greet you and tell you that you as the first user are the administrator.
 
+## Set bot command list
+
+If you want to set the command list write `/setcommands` to the bot father and send him this list:
+````
+start - Start the bot
+chatid - Display current chat id
+enablenotifications - Enable shop notifications for current chat
+disablenotifications - Disable shop notifications for current chat
+````
+
 ## Available bot commands
 
 * `/start` : Add own user to the database. If first user, role is set to administrator.

@@ -60,14 +60,14 @@ exports.handler = async event => {
 	return { statusCode: 200, body: '' };
 };
 
-bot.command('chatId', async ctx => {
+bot.command('chatid', async ctx => {
 	return ctx.reply(`The chat ID for this chat is: ${ctx.chat.id}`);
 });
 
-bot.command('enableNotifications', async ctx => {
+bot.command('enablenotifications', async ctx => {
 	return enableNotificationsAction(ctx);
 });
 
-bot.command('disableNotifications', async ctx => {
+bot.command('disablenotifications', async ctx => {
 	return disableNotificationsAction(ctx);
 });
