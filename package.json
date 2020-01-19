@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
-		"build": "npm run test && npm run updateWebhooks",
+		"build": "npm run test",
 		"updateWebhooks": "grunt shell:updateWebhooks",
 		"dev": "grunt && npm run updateWebhooks && grunt watch",
 		"test": "grunt lint"
