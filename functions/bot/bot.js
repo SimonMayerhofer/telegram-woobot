@@ -20,6 +20,11 @@ const disableNotificationsAction = require('./actions/disableNotifications');
 console.log(`Database Version: ${Database.VERSION}`);
 
 const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
+// enable @username commands in group chats
+bot.telegram.getMe().then(botInfo => {
+	bot.options.username = botInfo.username;
+});
+
 const db = new Database();
 const wc = new WCHelper(bot, db);
 
