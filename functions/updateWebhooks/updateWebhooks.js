@@ -8,6 +8,7 @@ const { WCWebhookHelper } = require('./components/WCWebhookHelper');
 
 exports.handler = async event => {
 	try {
+		console.log('Update WooCommerce webhooks.');
 		const wc = new WCWebhookHelper();
 		await wc.updateWebhooks();
 
@@ -16,6 +17,7 @@ exports.handler = async event => {
 				? process.env.TELEGRAM_BOT_TOKEN_DEV
 				: process.env.TELEGRAM_BOT_TOKEN;
 
+		console.log('Update Telegram webhook.');
 		request.post(
 			`https://api.telegram.org/bot${botToken}/setWebhook?url=${process.env.URL}/api/bot`,
 			{ json: {} },
@@ -29,6 +31,7 @@ exports.handler = async event => {
 			},
 		);
 	} catch (e) {
+		console.log('Error: ', e);
 		return { statusCode: 500, body: e.message };
 	}
 
