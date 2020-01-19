@@ -35,8 +35,12 @@ Thereafter, fill in the environment variables
 
 Once the above are done, you need to specify and tell telegram where your bot should direct the messages it received to. Do so by simply visiting this url
 ```
-https://api.telegram.org/bot{your_bot_token}/setWebhook?url={url_of_the_Netlify_Function}
+https://{your_netlify_domain}/api/updateWebhooks
 ```
+This will notify telegram and updates the webhook. It also creates or updates the necessary webhooks in your shop.
+
+If you want to update the webhooks after a successful deploy automatically, go to your Netlify site settings > Build & deploy and create a new 'Outgoing webhook' notification. Select 'Deploy succeeded' and enter the URL to your `updateWebhooks` function.
+
 Afterwhich, YOU ARE DONE!🎉🎉
 
 Try typing ```/start``` to your bot and see if it works. If everything worked, it'll greet you and tell you that you as the first user are the administrator.
