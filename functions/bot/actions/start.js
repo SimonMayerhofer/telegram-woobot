@@ -1,3 +1,4 @@
+const enableNotificationsAction = require('../actions/enableNotifications');
 const { getUser } = require('../components/helper');
 
 module.exports = async ctx => {
@@ -13,7 +14,8 @@ module.exports = async ctx => {
 		const response = await db.addUser(user);
 
 		if (response === 'first user added') {
-			return ctx.reply(`Hi ${name}! As the first user, you are the admin now.`);
+			await ctx.reply(`Hi ${name}! As the first user, you are the admin now.`);
+			return enableNotificationsAction(ctx);
 		}
 		if (response === 'user added') {
 			return ctx.reply(`Hi ${name}!`);
