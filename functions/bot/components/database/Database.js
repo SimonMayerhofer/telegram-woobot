@@ -5,10 +5,7 @@ const { OptionsCollection } = require('./OptionsCollection');
 class Database {
 	constructor() {
 		this.client = new faunadb.Client({
-			secret:
-				process.env.CONTEXT !== 'production'
-					? process.env.FAUNA_SECRET_KEY_DEV
-					: process.env.FAUNA_SECRET_KEY,
+			secret: process.env.FAUNA_SECRET_KEY,
 		});
 		this.query = faunadb.query;
 		this.users = new UsersCollection(this.client, this.query);

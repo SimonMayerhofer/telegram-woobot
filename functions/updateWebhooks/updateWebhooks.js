@@ -2,7 +2,18 @@
  * Update Webhooks function to update shop + bot webhooks after deploying.
  */
 
-require('dotenv').config();
+const envConfig = require('dotenv').config();
+/*
+ * Netlify dev currently don't allow to override environment variables.
+ * This is a workaround until such functionality is implemented. More Info:
+ * https://github.com/netlify/cli/issues/474#issuecomment-554108903
+ */
+if (envConfig.parsed) {
+	Object.entries(envConfig.parsed).forEach(([key, value]) => {
+		process.env[key] = value;
+	});
+}
+
 const request = require('request');
 const { WCWebhookHelper } = require('./components/WCWebhookHelper');
 
@@ -12,14 +23,9 @@ exports.handler = async event => {
 		const wc = new WCWebhookHelper();
 		await wc.updateWebhooks();
 
-		const botToken =
-			process.env.CONTEXT !== 'production'
-				? process.env.TELEGRAM_BOT_TOKEN_DEV
-				: process.env.TELEGRAM_BOT_TOKEN;
-
 		console.log('Update Telegram webhook.');
 		request.post(
-			`https://api.telegram.org/bot${botToken}/setWebhook?url=${process.env.URL}/api/bot`,
+			`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/setWebhook?url=${process.env.URL}/api/bot`,
 			{ json: {} },
 			function(error, response, body) {
 				if (!error && response.statusCode === 200) {

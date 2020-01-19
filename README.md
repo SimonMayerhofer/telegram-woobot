@@ -63,11 +63,11 @@ To locally test and develop the bot follow these steps:
 1. Create a new Telegram Bot and a new FaunaDB database for testing.
 2. Create `.env` file and enter your bot token + secret key:
    ```
-   TELEGRAM_BOT_TOKEN_DEV=your_dev_bot_token
-   FAUNA_SECRET_KEY_DEV=your_dev_secret_key
-   WC_CONSUMER_KEY_DEV=your_dev_consumer_key
-   WC_CONSUMER_SECRET_DEV=your_dev_consumer_secret
-   WC_SITE_URL_DEV=https://www.example.com
+   TELEGRAM_BOT_TOKEN=your_dev_bot_token
+   FAUNA_SECRET_KEY=your_dev_secret_key
+   WC_CONSUMER_KEY=your_dev_consumer_key
+   WC_CONSUMER_SECRET=your_dev_consumer_secret
+   WC_SITE_URL=https://www.example.com
    ```
 3. Setup Netlify CLI for Netlify Dev server ([more info](https://github.com/netlify/cli/blob/master/docs/netlify-dev.md))
    ```bash
