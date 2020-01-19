@@ -4,11 +4,11 @@
 
 require('dotenv').config();
 const request = require('request');
-const { WCHelper } = require('../bot/components/WCHelper');
+const { WCWebhookHelper } = require('./components/WCWebhookHelper');
 
 exports.handler = async event => {
 	try {
-		const wc = new WCHelper();
+		const wc = new WCWebhookHelper();
 		await wc.updateWebhooks();
 
 		const botToken =
