@@ -90,3 +90,4 @@ To locally test and develop the bot follow these steps:
 ## Troubleshooting
 
 * "*unable to verify the first certificate*": If you get this message during local development because you're working with a local web-server add `NODE_TLS_REJECT_UNAUTHORIZED=0` to your `.env` file. **Important:** only do this with local web-servers while developing. If you get this message for your production server you have a problem with your SSL certificate. [More Informations](https://stackoverflow.com/q/31673587/2180161).
+* If you get 401 errors even though your consumer key secret and everything is properly configured, there is a chance your site is not passing through the authentication headers to PHP in CGI mode. This can be fixed e.g. by adding the following line to the top of your `.htaccess`: `SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1`.
