@@ -6,7 +6,7 @@ class Database {
 	constructor() {
 		this.client = new faunadb.Client({
 			secret:
-				process.env.NODE_ENV !== 'production'
+				process.env.CONTEXT !== 'production'
 					? process.env.FAUNA_SECRET_KEY_DEV
 					: process.env.FAUNA_SECRET_KEY,
 		});

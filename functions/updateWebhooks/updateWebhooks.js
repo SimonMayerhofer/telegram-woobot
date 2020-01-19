@@ -13,7 +13,7 @@ exports.handler = async event => {
 		await wc.updateWebhooks();
 
 		const botToken =
-			process.env.NODE_ENV !== 'production'
+			process.env.CONTEXT !== 'production'
 				? process.env.TELEGRAM_BOT_TOKEN_DEV
 				: process.env.TELEGRAM_BOT_TOKEN;
 

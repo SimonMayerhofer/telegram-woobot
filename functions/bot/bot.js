@@ -9,7 +9,7 @@ const disableNotificationsAction = require('./actions/disableNotifications');
 console.log(`Database Version: ${Database.VERSION}`);
 
 const bot = new Telegraf(
-	process.env.NODE_ENV !== 'production'
+	process.env.CONTEXT !== 'production'
 		? process.env.TELEGRAM_BOT_TOKEN_DEV
 		: process.env.TELEGRAM_BOT_TOKEN,
 );

@@ -3,7 +3,7 @@ const WooCommerceRestApi = require('@woocommerce/woocommerce-rest-api').default;
 class WCHelper {
 	constructor() {
 		this.api = new WooCommerceRestApi(
-			process.env.NODE_ENV !== 'production'
+			process.env.CONTEXT !== 'production'
 				? {
 						url: process.env.WC_SITE_URL_DEV,
 						consumerKey: process.env.WC_CONSUMER_KEY_DEV,
