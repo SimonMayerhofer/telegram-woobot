@@ -25,7 +25,7 @@
 		"eslint-plugin-import": "^2.20.0",
 		"eslint-plugin-prettier": "3.1.2",
 		"glob": "7.1.6",
-		"grunt": "1.0.4",
+		"grunt": "1.5.2",
 		"grunt-contrib-watch": "1.1.0",
 		"grunt-dev-update": "2.3.0",
 		"grunt-eslint": "22.0.0",
